@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rathna Tours - Discover Sri Lanka</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ff7e00;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e67200;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #ff7e00;
+            color: #ff7e00;
+        }
+        .btn-outline:hover {
+            background-color: #ff7e00;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #005b96;
+            margin-bottom: 1rem;
+        }
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #005b96;
+        }
+        .logo span {
+            color: #ff7e00;
+        }
+        nav ul {
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #ff7e00;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Page Container */
+        #page-container {
+            margin-top: 80px;
+            min-height: calc(100vh - 200px);
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1580502304784-8985b7eb7260?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 3rem;
+        }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Tours Section */
+        .tours {
+            padding: 3rem 0;
+            background: #fff;
+        }
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .tour-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .tour-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        .tour-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .tour-card:hover .tour-image img {
+            transform: scale(1.1);
+        }
+        .tour-info {
+            padding: 1.5rem;
+        }
+        .tour-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #005b96;
+        }
+        .tour-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: #777;
+        }
+        .tour-price {
+            color: #ff7e00;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 3rem 0;
+            background: linear-gradient(to bottom, #f8f8f8, #fff);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            text-align: center;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            color: #005b96;
+            margin-bottom: 1.5rem;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 3rem 0;
+            background: #fff;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .testimonial-text:before {
+            content: """;
+            font-size: 4rem;
+            color: #ff7e00;
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        .author-details {
+            font-weight: 600;
+            color: #005b96;
+        }
+        .author-details span {
+            display: block;
+            font-weight: normal;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* About Page */
+        .about-content {
+            padding: 2rem 0;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .team-member {
+            text-align: center;
+        }
+        .team-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tours Page */
+        .tour-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .category-btn {
+            padding: 10px 20px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn.active, .category-btn:hover {
+            background: #005b96;
+            color: white;
+        }
+
+        /* Contact Page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            background: #005b96;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .map {
+            margin-top: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 4rem 0 2rem;
+            margin-top: 3rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ff7e00;
+        }
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #ff7e00;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a:hover {
+            color: #ff7e00;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #ff7e00;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav {
+                position: fixed;
+                top: 80px;
+                right: -300px;
+                width: 250px;
+                height: calc(100vh - 80px);
+                background: #fff;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                padding-top: 30px;
+            }
+            nav.active {
+                right: 0;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 15px 0;
+                margin-left: 30px;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Rathna <span>Tours</span></a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-page="about">About Us</a></li>
+                    <li><a href="#tours" class="nav-link" data-page="tours">Tours</a></li>
+                    <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+                    <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Container -->
+    <div id="page-container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Discover the Wonder of Sri Lanka</h1>
+                    <p>Experience the beauty, culture, and adventure of the Pearl of the Indian Ocean with our expertly crafted tours.</p>
+                    <a href="#tours" class="btn nav-link" data-page="tours">Explore Our Tours</a>
+                    <a href="#contact" class="btn btn-outline nav-link" data-page="contact">Contact Us</a>
+                </div>
+            </section>
+
+            <!-- Tours Section -->
+            <section class="tours">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Popular Tours</h2>
+                        <p>Explore our most sought-after travel experiences in Sri Lanka</p>
+                    </div>
+                    <div class="tours-grid">
+                        <div class="tour-card">
+                            <div class="tour-image">
+                                <img src="https://images.unsplash.com/photo-1542858548-5d48f5e97f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Cultural Triangle Tour">
+                            </div>
+                            <div class="tour-info">
+                                <h3>Cultural Triangle</h3>
+                                <div class="tour-meta">
+                                    <span><i class="fas fa-clock"></i> 5 days</span>
+                                    <span><i class="fas fa-user-friends"></i> Max 12 people</span>
+                                </div>
+                                <p>Explore ancient kingdoms, majestic palaces, and sacred temples in Sri Lanka's cultural heartland.</p>
+                                <div class="tour-price">From $450</div>
+                            </div>
+                        </div>
+                        <div class="tour-card">
+                            <div class="tour-image">
+                                <img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Hill Country Tour">
+                            </div>
+                            <div class="tour-info">
+                                <h3>Hill Country Adventure</h3>
+                                <div class="tour-meta">
+                                    <span><i class="fas fa-clock"></i> 4 days</span>
+                                    <span><i class="fas fa-user-friends"></i> Max 10 people</span>
+                                </div>
+                                <p>Journey through misty mountains, tea plantations, and waterfalls in Sri Lanka's picturesque highlands.</p>
+                                <div class="tour-price">From $380</div>
+                            </div>
+                        </div>
+                        <div class="tour-card">
+                            <div class="tour-image">
+                                <img src="https://images.unsplash.com/photo-1599640842225-85d111c20f6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Beach Escape Tour">
+                            </div>
+                            <div class="tour-info">
+                                <h3>Beach Escape</h3>
+                                <div class="tour-meta">
+                                    <span><i class="fas fa-clock"></i> 7 days</span>
+                                    <span><i class="fas fa-user-friends"></i> Max 15 people</span>
+                                </div>
+                                <p>Relax on pristine beaches, enjoy water sports, and experience coastal culture on this tropical getaway.</p>
+                                <div class="tour-price">From $620</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="#tours" class="btn nav-link" data-page="tours">View All Tours</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="services">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Services</h2>
+                        <p>We provide comprehensive travel solutions to make your Sri Lankan journey unforgettable</p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <h3>Customized Itineraries</h3>
+                            <p>Tailor-made tours designed to match your interests, pace, and budget.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3>Transportation</h3>
+                            <p>Comfortable vehicles with experienced drivers for safe and enjoyable travel.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-hotel"></i>
+                            </div>
+                            <h3>Accommodation</h3>
+                            <p>Carefully selected hotels and guesthouses to ensure a comfortable stay.</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Expert Guides</h3>
+                            <p>Knowledgeable local guides to enhance your cultural and historical experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>What Our Travelers Say</h2>
+                        <p>Authentic experiences from people who explored Sri Lanka with us</p>
+                    </div>
+                    <div class="testimonial-grid">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">Our family had an incredible time with Rathna Tours. They took care of every detail and showed us parts of Sri Lanka we would never have discovered on our own.</p>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
+                                </div>
+                                <div class="author-details">
+                                    Sarah Johnson
+                                    <span>Canada</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">The cultural triangle tour was absolutely fascinating. Our guide's knowledge of history brought ancient sites to life. Highly recommend!</p>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Miller">
+                                </div>
+                                <div class="author-details">
+                                    David Miller
+                                    <span>United Kingdom</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">From the beaches to the mountains, every moment was perfectly planned. The team at Rathna Tours made our honeymoon truly special.</p>
+                            <div class="testimonial-author">
+                                <div class="author-image">
+                                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Emma and James Wilson">
+                                </div>
+                                <div class="author-details">
+                                    Emma & James Wilson
+                                    <span>Australia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Rathna Tours</h2>
+                    <p>Your trusted travel partner in Sri Lanka since 2005</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-grid">
+                        <div>
+                            <h3>Our Story</h3>
+                            <p>Founded in 2005, Rathna Tours began as a small family business with a passion for showcasing the incredible beauty and rich culture of Sri Lanka. What started as a modest operation with just one vehicle has grown into a respected tour company known for exceptional service and authentic experiences.</p>
+                            <p>Today, we continue to operate as a family business, maintaining the personal touch that has always set us apart. Our team includes experienced guides, skilled drivers, and travel experts who all share a deep love for our country and a commitment to creating unforgettable journeys for our guests.</p>
+                            <p>We believe that travel should be transformative, and we're dedicated to creating experiences that not only show you the highlights of Sri Lanka but also give you a genuine connection to its people, culture, and natural wonders.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1599640842225-85d111c20f6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="About Rathna Tours">
+                        </div>
+                    </div>
+                    
+                    <div class="section-title" style="margin-top: 4rem;">
+                        <h2>Our Team</h2>
+                        <p>Meet the people who make your Sri Lankan adventure unforgettable</p>
+                    </div>
+                    
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-image">
+                                <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Rathna Perera">
+                            </div>
+                            <h3>Rathna Perera</h3>
+                            <p>Founder & Managing Director</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-image">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Chamindi Silva">
+                            </div>
+                            <h3>Chamindi Silva</h3>
+                            <p>Head of Operations</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-image">
+                                <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Sampath Bandara">
+                            </div>
+                            <h3>Sampath Bandara</h3>
+                            <p>Senior Tour Guide</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-image">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Nayana Fernando">
+                            </div>
+                            <h3>Nayana Fernando</h3>
+                            <p>Customer Relations Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tours Page -->
+        <div id="tours" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Tour Packages</h2>
+                    <p>Discover Sri Lanka with our carefully crafted itineraries</p>
+                </div>
+                
+                <div class="tour-categories">
+                    <button class="category-btn active" data-category="all">All Tours</button>
+                    <button class="category-btn" data-category="cultural">Cultural</button>
+                    <button class="category-btn" data-category="adventure">Adventure</button>
+                    <button class="category-btn" data-category="beach">Beach</button>
+                    <button class="category-btn" data-category="wildlife">Wildlife</button>
+                </div>
+                
+                <div class="tours-grid">
+                    <div class="tour-card" data-category="cultural">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1542858548-5d48f5e97f7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Cultural Triangle Tour">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Cultural Triangle</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 5 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 12 people</span>
+                            </div>
+                            <p>Explore ancient kingdoms, majestic palaces, and sacred temples in Sri Lanka's cultural heartland.</p>
+                            <div class="tour-price">From $450</div>
+                        </div>
+                    </div>
+                    <div class="tour-card" data-category="adventure">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Hill Country Adventure">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Hill Country Adventure</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 4 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 10 people</span>
+                            </div>
+                            <p>Journey through misty mountains, tea plantations, and waterfalls in Sri Lanka's picturesque highlands.</p>
+                            <div class="tour-price">From $380</div>
+                        </div>
+                    </div>
+                    <div class="tour-card" data-category="beach">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1599640842225-85d111c20f6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Beach Escape">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Beach Escape</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 7 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 15 people</span>
+                            </div>
+                            <p>Relax on pristine beaches, enjoy water sports, and experience coastal culture on this tropical getaway.</p>
+                            <div class="tour-price">From $620</div>
+                        </div>
+                    </div>
+                    <div class="tour-card" data-category="wildlife">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Wildlife Safari">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Wildlife Safari</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 3 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 8 people</span>
+                            </div>
+                            <p>Embark on an exciting safari adventure to spot elephants, leopards, and diverse bird species in their natural habitat.</p>
+                            <div class="tour-price">From $320</div>
+                        </div>
+                    </div>
+                    <div class="tour-card" data-category="cultural">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1580502304784-8985b7eb7260?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Ancient Cities Tour">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Ancient Cities Tour</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 6 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 12 people</span>
+                            </div>
+                            <p>Discover the archaeological wonders of Anuradhapura, Polonnaruwa, and other ancient capitals of Sri Lanka.</p>
+                            <div class="tour-price">From $520</div>
+                        </div>
+                    </div>
+                    <div class="tour-card" data-category="adventure">
+                        <div class="tour-image">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Mountain Trekking">
+                        </div>
+                        <div class="tour-info">
+                            <h3>Mountain Trekking</h3>
+                            <div class="tour-meta">
+                                <span><i class="fas fa-clock"></i> 4 days</span>
+                                <span><i class="fas fa-user-friends"></i> Max 6 people</span>
+                            </div>
+                            <p>Challenge yourself with breathtaking treks through Sri Lanka's highest peaks and most scenic mountain trails.</p>
+                            <div class="tour-price">From $400</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Page -->
+        <div id="services" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive travel solutions for your Sri Lankan journey</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>Customized Itineraries</h3>
+                        <p>We create personalized travel plans based on your interests, schedule, and budget. Whether you're seeking cultural immersion, adventure, relaxation, or a mix of everything, we'll design the perfect Sri Lankan experience for you.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Transportation</h3>
+                        <p>Travel in comfort and safety with our modern, well-maintained vehicles. Our experienced drivers know Sri Lanka's roads intimately and will ensure you reach each destination smoothly and efficiently.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <h3>Accommodation</h3>
+                        <p>From luxury resorts to charming guesthouses, we partner with the best accommodations across Sri Lanka. We carefully select properties that offer comfort, character, and authentic Sri Lankan hospitality.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Expert Guides</h3>
+                        <p>Our knowledgeable local guides bring Sri Lanka's history, culture, and natural wonders to life. Fluent in multiple languages, they're passionate about sharing their insights and ensuring you have a meaningful travel experience.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3>Ticket Reservations</h3>
+                        <p>We handle all entrance tickets, permits, and activity bookings in advance, saving you time and ensuring seamless access to attractions, national parks, and cultural sites throughout your journey.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Culinary Experiences</h3>
+                        <p>Discover the flavors of Sri Lanka with curated food experiences. From street food tours to cooking classes with local families, we'll introduce you to the diverse and delicious cuisine of our island.</p>
+                    </div>
+                </div>
+                
+                <div class="section-title" style="margin-top: 4rem;">
+                    <h2>Why Choose Rathna Tours?</h2>
+                </div>
+                
+                <div class="about-grid">
+                    <div>
+                        <h3>Local Expertise</h3>
+                        <p>With over 18 years of experience, we have an intimate knowledge of Sri Lanka's hidden gems, seasonal variations, and cultural nuances that can't be found in guidebooks.</p>
+                        
+                        <h3>Personalized Service</h3>
+                        <p>We treat each client as unique, taking the time to understand your preferences and crafting experiences that match your travel style and interests.</p>
+                        
+                        <h3>Quality Assurance</h3>
+                        <p>We maintain rigorous standards for all our services, from vehicle maintenance to guide training, ensuring a consistently high-quality experience.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Why Choose Us">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch to start planning your Sri Lankan adventure</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get In Touch</h3>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Address</h4>
+                                <p>123 Galle Road, Colombo 03, Sri Lanka</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+94 11 234 5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@rathnatours.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Office Hours</h4>
+                                <p>Monday - Friday: 8:30 AM - 5:30 PM<br>Saturday: 9:00 AM - 1:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="social-icons" style="margin-top: 2rem;">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="tour">Tour Information</option>
+                                    <option value="custom">Custom Tour Request</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.795852376298!2d79.8521754747537!3d6.919227318376299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25963120d3787%3A0xa4f0dfa5f586e2f!2sGalle%20Rd%2C%20Colombo!5e0!3m2!1sen!2slk!4v1689837342986!5m2!1sen!2slk" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">Rathna Tours</div>
+                    <p>Creating unforgettable journeys through Sri Lanka since 2005. Experience the island's beauty with our expert guidance.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#about" class="nav-link" data-page="about">About Us</a></li>
+                        <li><a href="#tours" class="nav-link" data-page="tours">Tours</a></li>
+                        <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+                        <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Galle Road, Colombo, Sri Lanka</p>
+                    <p><i class="fas fa-phone"></i> +94 11 234 5678</p>
+                    <p><i class="fas fa-envelope"></i> info@rathnatours.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Rathna Tours. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const menuToggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('nav');
+            
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === targetPage) {
+                            page.classList.add('active');
+                            // Scroll to top
+                            window.scrollTo(0, 0);
+                        }
+                    });
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    nav.classList.remove('active');
+                });
+            });
+            
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+            });
+            
+            // Tour category filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const tourCards = document.querySelectorAll('.tour-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter tours
+                    tourCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
